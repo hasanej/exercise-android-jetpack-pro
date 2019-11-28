@@ -3,6 +3,10 @@ package id.co.hasaneljabir.academy.ui.reader.list;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,11 +16,6 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ProgressBar;
-
 import java.util.List;
 
 import id.co.hasaneljabir.academy.R;
@@ -24,7 +23,6 @@ import id.co.hasaneljabir.academy.data.ModuleEntity;
 import id.co.hasaneljabir.academy.ui.CourseReaderActivity;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderCallback;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderViewModel;
-import id.co.hasaneljabir.academy.utils.DataDummy;
 
 
 public class ModuleListFragment extends Fragment implements MyAdapterClickListener {

@@ -1,11 +1,11 @@
 package id.co.hasaneljabir.academy.ui;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
-
-import android.os.Bundle;
 
 import id.co.hasaneljabir.academy.R;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderCallback;

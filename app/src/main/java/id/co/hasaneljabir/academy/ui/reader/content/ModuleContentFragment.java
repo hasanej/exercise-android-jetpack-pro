@@ -1,20 +1,18 @@
 package id.co.hasaneljabir.academy.ui.reader.content;
 
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
+
 import id.co.hasaneljabir.academy.R;
-import id.co.hasaneljabir.academy.data.ContentEntity;
 import id.co.hasaneljabir.academy.data.ModuleEntity;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderViewModel;
 

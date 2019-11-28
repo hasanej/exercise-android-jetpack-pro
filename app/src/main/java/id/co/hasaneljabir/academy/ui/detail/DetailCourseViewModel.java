@@ -30,7 +30,7 @@ public class DetailCourseViewModel extends ViewModel {
         this.courseId = courseId;
     }
 
-    public String getCourseId(){
+    public String getCourseId() {
         return courseId;
     }
 }

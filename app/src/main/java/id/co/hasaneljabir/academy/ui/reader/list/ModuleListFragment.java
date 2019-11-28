@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,7 @@ import id.co.hasaneljabir.academy.R;
 import id.co.hasaneljabir.academy.data.ModuleEntity;
 import id.co.hasaneljabir.academy.ui.CourseReaderActivity;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderCallback;
+import id.co.hasaneljabir.academy.ui.reader.CourseReaderViewModel;
 import id.co.hasaneljabir.academy.utils.DataDummy;
 
 
@@ -32,6 +34,7 @@ public class ModuleListFragment extends Fragment implements MyAdapterClickListen
     private RecyclerView recyclerView;
     private ProgressBar progressBar;
 
+    private CourseReaderViewModel viewModel;
 
     public ModuleListFragment() {
         // Required empty public constructor
@@ -60,8 +63,9 @@ public class ModuleListFragment extends Fragment implements MyAdapterClickListen
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
+            viewModel = ViewModelProviders.of(getActivity()).get(CourseReaderViewModel.class);
             adapter = new ModuleListAdapter(this);
-            populateRecyclerView(DataDummy.generateDummyModules("a14"));
+            populateRecyclerView(viewModel.getModules());
         }
     }
 
@@ -74,6 +78,7 @@ public class ModuleListFragment extends Fragment implements MyAdapterClickListen
     @Override
     public void onItemClicked(int position, String moduleId) {
         courseReaderCallback.moveTo(position, moduleId);
+        viewModel.setSelectedModule(moduleId);
     }
 
     private void populateRecyclerView(List<ModuleEntity> modules) {

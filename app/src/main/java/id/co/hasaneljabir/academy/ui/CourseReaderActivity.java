@@ -3,26 +3,33 @@ package id.co.hasaneljabir.academy.ui;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
 import id.co.hasaneljabir.academy.R;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderCallback;
+import id.co.hasaneljabir.academy.ui.reader.CourseReaderViewModel;
 import id.co.hasaneljabir.academy.ui.reader.content.ModuleContentFragment;
 import id.co.hasaneljabir.academy.ui.reader.list.ModuleListFragment;
 
 public class CourseReaderActivity extends AppCompatActivity implements CourseReaderCallback {
 
     public static final String EXTRA_COURSE_ID = "extra_course_id";
+    private CourseReaderViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_reader);
+
+        viewModel = ViewModelProviders.of(this).get(CourseReaderViewModel.class);
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             String courseId = bundle.getString(EXTRA_COURSE_ID);
             if (courseId != null) {
+                viewModel.setCourseId(courseId);
                 populateFragment();
             }
         }

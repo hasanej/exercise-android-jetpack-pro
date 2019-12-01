@@ -4,16 +4,20 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.ArrayList;
 
-import id.co.hasaneljabir.academy.data.ContentEntity;
 import id.co.hasaneljabir.academy.data.ModuleEntity;
-import id.co.hasaneljabir.academy.utils.DataDummy;
+import id.co.hasaneljabir.academy.data.source.AcademyRepository;
 
 public class CourseReaderViewModel extends ViewModel {
     private String courseId;
     private String moduleId;
+    private AcademyRepository academyRepository;
+
+    public CourseReaderViewModel(AcademyRepository mAcademyRepository) {
+        this.academyRepository = mAcademyRepository;
+    }
 
     public ArrayList<ModuleEntity> getModules() {
-        return DataDummy.generateDummyModules(courseId);
+        return academyRepository.getAllModulesByCourse(courseId);
     }
 
     public void setCourseId(String courseId) {
@@ -21,16 +25,7 @@ public class CourseReaderViewModel extends ViewModel {
     }
 
     public ModuleEntity getSelectedModule() {
-        ModuleEntity module = null;
-        for (int i = 0; i < getModules().size(); i++) {
-            if (getModules().get(i).getmModuleId().equals(moduleId)) {
-                module = getModules().get(i);
-
-                module.contentEntity = new ContentEntity("<h3 class=\\\"fr-text-bordered\\\">" + module.getmTitle() + "</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>");
-                break;
-            }
-        }
-        return module;
+        return academyRepository.getContent(courseId, moduleId);
     }
 
     public void setSelectedModule(String moduleId) {

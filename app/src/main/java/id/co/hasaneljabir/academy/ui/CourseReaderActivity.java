@@ -2,8 +2,10 @@ package id.co.hasaneljabir.academy.ui;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -12,6 +14,7 @@ import id.co.hasaneljabir.academy.ui.reader.CourseReaderCallback;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderViewModel;
 import id.co.hasaneljabir.academy.ui.reader.content.ModuleContentFragment;
 import id.co.hasaneljabir.academy.ui.reader.list.ModuleListFragment;
+import id.co.hasaneljabir.academy.viewModel.ViewModelFactory;
 
 public class CourseReaderActivity extends AppCompatActivity implements CourseReaderCallback {
 
@@ -23,7 +26,7 @@ public class CourseReaderActivity extends AppCompatActivity implements CourseRea
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_reader);
 
-        viewModel = ViewModelProviders.of(this).get(CourseReaderViewModel.class);
+        viewModel = obtainViewModel(this);
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -61,5 +64,13 @@ public class CourseReaderActivity extends AppCompatActivity implements CourseRea
             fragmentTransaction.addToBackStack(null);
         }
         fragmentTransaction.commit();
+    }
+
+    @NonNull
+    private static CourseReaderViewModel obtainViewModel(FragmentActivity activity) {
+        // Use a Factory to inject dependencies into the ViewModel
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+
+        return ViewModelProviders.of(activity, factory).get(CourseReaderViewModel.class);
     }
 }

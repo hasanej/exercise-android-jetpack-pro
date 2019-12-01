@@ -10,11 +10,13 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import id.co.hasaneljabir.academy.R;
 import id.co.hasaneljabir.academy.data.ModuleEntity;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderViewModel;
+import id.co.hasaneljabir.academy.viewModel.ViewModelFactory;
 
 public class ModuleContentFragment extends Fragment {
     public static final String TAG = ModuleContentFragment.class.getSimpleName();
@@ -50,7 +52,7 @@ public class ModuleContentFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
-            viewModel = ViewModelProviders.of(getActivity()).get(CourseReaderViewModel.class);
+            viewModel = obtainViewModel(getActivity());
             ModuleEntity module = viewModel.getSelectedModule();
             populateWebView(module);
         }
@@ -58,5 +60,13 @@ public class ModuleContentFragment extends Fragment {
 
     private void populateWebView(ModuleEntity content) {
         webView.loadData(content.contentEntity.getContent(), "text/html", "UTF-8");
+    }
+
+    @NonNull
+    private static CourseReaderViewModel obtainViewModel(FragmentActivity activity) {
+        // Use a Factory to inject dependencies into the ViewModel
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+
+        return ViewModelProviders.of(activity, factory).get(CourseReaderViewModel.class);
     }
 }

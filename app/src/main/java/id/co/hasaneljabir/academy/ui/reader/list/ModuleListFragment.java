@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -23,6 +24,7 @@ import id.co.hasaneljabir.academy.data.ModuleEntity;
 import id.co.hasaneljabir.academy.ui.CourseReaderActivity;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderCallback;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderViewModel;
+import id.co.hasaneljabir.academy.viewModel.ViewModelFactory;
 
 
 public class ModuleListFragment extends Fragment implements MyAdapterClickListener {
@@ -61,7 +63,7 @@ public class ModuleListFragment extends Fragment implements MyAdapterClickListen
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         if (getActivity() != null) {
-            viewModel = ViewModelProviders.of(getActivity()).get(CourseReaderViewModel.class);
+            viewModel = obtainViewModel(getActivity());
             adapter = new ModuleListAdapter(this);
             populateRecyclerView(viewModel.getModules());
         }
@@ -87,5 +89,13 @@ public class ModuleListFragment extends Fragment implements MyAdapterClickListen
         recyclerView.setAdapter(adapter);
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
+    }
+
+    @NonNull
+    private static CourseReaderViewModel obtainViewModel(FragmentActivity activity) {
+        // Use a Factory to inject dependencies into the ViewModel
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+
+        return ViewModelProviders.of(activity, factory).get(CourseReaderViewModel.class);
     }
 }

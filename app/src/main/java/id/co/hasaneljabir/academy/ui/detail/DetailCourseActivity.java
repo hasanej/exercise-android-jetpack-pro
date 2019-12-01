@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProviders;
@@ -23,6 +24,7 @@ import id.co.hasaneljabir.academy.data.CourseEntity;
 import id.co.hasaneljabir.academy.data.ModuleEntity;
 import id.co.hasaneljabir.academy.ui.CourseReaderActivity;
 import id.co.hasaneljabir.academy.utils.GlideApp;
+import id.co.hasaneljabir.academy.viewModel.ViewModelFactory;
 
 public class DetailCourseActivity extends AppCompatActivity {
 
@@ -59,7 +61,7 @@ public class DetailCourseActivity extends AppCompatActivity {
         rvModule = findViewById(R.id.rv_module);
         imagePoster = findViewById(R.id.image_poster);
 
-        viewModel = ViewModelProviders.of(this).get(DetailCourseViewModel.class);
+        viewModel = obtainViewModel(this);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
@@ -98,5 +100,13 @@ public class DetailCourseActivity extends AppCompatActivity {
             intent.putExtra(CourseReaderActivity.EXTRA_COURSE_ID, viewModel.getCourseId());
             v.getContext().startActivity(intent);
         });
+    }
+
+    @NonNull
+    private static DetailCourseViewModel obtainViewModel(AppCompatActivity activity) {
+        // Use a Factory to inject dependencies into the ViewModel
+        ViewModelFactory factory = ViewModelFactory.getInstance(activity.getApplication());
+
+        return ViewModelProviders.of(activity, factory).get(DetailCourseViewModel.class);
     }
 }

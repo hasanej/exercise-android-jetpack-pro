@@ -5,10 +5,16 @@ import androidx.lifecycle.ViewModel;
 import java.util.List;
 
 import id.co.hasaneljabir.academy.data.CourseEntity;
-import id.co.hasaneljabir.academy.utils.DataDummy;
+import id.co.hasaneljabir.academy.data.source.AcademyRepository;
 
 public class AcademyViewModel extends ViewModel {
+    private AcademyRepository academyRepository;
+
+    public AcademyViewModel(AcademyRepository mAcademyRepository) {
+        this.academyRepository = mAcademyRepository;
+    }
+
     public List<CourseEntity> getCourses() {
-        return DataDummy.generateDummyCourses();
+        return academyRepository.getAllCourses();
     }
 }

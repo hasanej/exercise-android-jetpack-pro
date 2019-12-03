@@ -1,8 +1,9 @@
 package id.co.hasaneljabir.academy.ui.reader;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import id.co.hasaneljabir.academy.data.ModuleEntity;
 import id.co.hasaneljabir.academy.data.source.AcademyRepository;
@@ -16,7 +17,7 @@ public class CourseReaderViewModel extends ViewModel {
         this.academyRepository = mAcademyRepository;
     }
 
-    public ArrayList<ModuleEntity> getModules() {
+    public LiveData<List<ModuleEntity>> getModules() {
         return academyRepository.getAllModulesByCourse(courseId);
     }
 
@@ -24,7 +25,7 @@ public class CourseReaderViewModel extends ViewModel {
         this.courseId = courseId;
     }
 
-    public ModuleEntity getSelectedModule() {
+    public LiveData<ModuleEntity> getSelectedModule() {
         return academyRepository.getContent(courseId, moduleId);
     }
 

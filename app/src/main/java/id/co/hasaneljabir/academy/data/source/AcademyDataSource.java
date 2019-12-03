@@ -1,18 +1,20 @@
 package id.co.hasaneljabir.academy.data.source;
 
+import androidx.lifecycle.LiveData;
+
 import java.util.List;
 
 import id.co.hasaneljabir.academy.data.CourseEntity;
 import id.co.hasaneljabir.academy.data.ModuleEntity;
 
 public interface AcademyDataSource {
-    List<CourseEntity> getAllCourses();
+    LiveData<List<CourseEntity>> getAllCourses();
 
-    CourseEntity getCourseWithModules(String courseId);
+    LiveData<CourseEntity> getCourseWithModules(String courseId);
 
-    List<ModuleEntity> getAllModulesByCourse(String courseId);
+    LiveData<List<ModuleEntity>> getAllModulesByCourse(String courseId);
 
-    List<CourseEntity> getBookmarkedCourses();
+    LiveData<List<CourseEntity>> getBookmarkedCourses();
 
-    ModuleEntity getContent(String courseId, String moduleId);
+    LiveData<ModuleEntity> getContent(String courseId, String moduleId);
 }

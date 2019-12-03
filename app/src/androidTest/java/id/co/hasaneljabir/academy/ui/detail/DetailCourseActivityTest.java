@@ -3,14 +3,18 @@ package id.co.hasaneljabir.academy.ui.detail;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.test.espresso.IdlingRegistry;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
 import id.co.hasaneljabir.academy.R;
 import id.co.hasaneljabir.academy.data.CourseEntity;
+import id.co.hasaneljabir.academy.utils.EspressoIdlingResource;
 import id.co.hasaneljabir.academy.utils.FakeDataDummy;
 import id.co.hasaneljabir.academy.utils.RecyclerViewItemCountAssertion;
 
@@ -34,13 +38,18 @@ public class DetailCourseActivityTest {
         }
     };
 
+    @Before
+    public void setUp() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource());
+    }
+
+    @After
+    public void tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource());
+    }
+
     @Test
     public void loadCourse() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         onView(withId(R.id.text_title)).check(matches(isDisplayed()));
         onView(withId(R.id.text_title)).check(matches(withText(dummyCourse.getTitle())));
         onView(withId(R.id.text_date)).check(matches(isDisplayed()));
@@ -49,11 +58,6 @@ public class DetailCourseActivityTest {
 
     @Test
     public void loadModules() {
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         onView(withId(R.id.rv_module)).check(matches(isDisplayed()));
         onView(withId(R.id.rv_module)).check(new RecyclerViewItemCountAssertion(7));
     }

@@ -11,7 +11,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import id.co.hasaneljabir.academy.data.CourseEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.CourseEntity;
 import id.co.hasaneljabir.academy.data.source.AcademyRepository;
 import id.co.hasaneljabir.academy.ui.utils.FakeDataDummy;
 

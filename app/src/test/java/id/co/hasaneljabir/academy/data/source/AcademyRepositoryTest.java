@@ -11,8 +11,8 @@ import org.mockito.Mockito;
 import java.util.ArrayList;
 import java.util.List;
 
-import id.co.hasaneljabir.academy.data.CourseEntity;
-import id.co.hasaneljabir.academy.data.ModuleEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.CourseEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.ModuleEntity;
 import id.co.hasaneljabir.academy.data.source.remote.RemoteRepository;
 import id.co.hasaneljabir.academy.data.source.remote.response.ContentResponse;
 import id.co.hasaneljabir.academy.data.source.remote.response.CourseResponse;

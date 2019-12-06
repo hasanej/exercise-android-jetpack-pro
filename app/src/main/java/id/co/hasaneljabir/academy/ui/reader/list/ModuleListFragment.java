@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import id.co.hasaneljabir.academy.R;
-import id.co.hasaneljabir.academy.data.ModuleEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.ModuleEntity;
 import id.co.hasaneljabir.academy.ui.CourseReaderActivity;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderCallback;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderViewModel;

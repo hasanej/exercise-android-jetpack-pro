@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import id.co.hasaneljabir.academy.data.ModuleEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.ModuleEntity;
 import id.co.hasaneljabir.academy.data.source.AcademyRepository;
 
 public class CourseReaderViewModel extends ViewModel {

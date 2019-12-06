@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import id.co.hasaneljabir.academy.R;
-import id.co.hasaneljabir.academy.data.ModuleEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.ModuleEntity;
 
 public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapter.ModuleViewHolder> {
 

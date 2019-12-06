@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import id.co.hasaneljabir.academy.R;
-import id.co.hasaneljabir.academy.data.CourseEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.CourseEntity;
 import id.co.hasaneljabir.academy.viewModel.ViewModelFactory;
 
 

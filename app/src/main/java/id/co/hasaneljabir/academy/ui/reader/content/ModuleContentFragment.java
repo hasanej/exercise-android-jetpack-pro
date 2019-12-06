@@ -14,7 +14,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import id.co.hasaneljabir.academy.R;
-import id.co.hasaneljabir.academy.data.ModuleEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.ModuleEntity;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderViewModel;
 import id.co.hasaneljabir.academy.viewModel.ViewModelFactory;
 

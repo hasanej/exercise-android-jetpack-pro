@@ -13,7 +13,7 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import id.co.hasaneljabir.academy.R;
-import id.co.hasaneljabir.academy.data.CourseEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.CourseEntity;
 import id.co.hasaneljabir.academy.utils.EspressoIdlingResource;
 import id.co.hasaneljabir.academy.utils.FakeDataDummy;
 import id.co.hasaneljabir.academy.utils.RecyclerViewItemCountAssertion;

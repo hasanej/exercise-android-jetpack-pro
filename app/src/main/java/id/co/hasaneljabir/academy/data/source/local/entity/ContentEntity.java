@@ -1,4 +1,4 @@
-package id.co.hasaneljabir.academy.data;
+package id.co.hasaneljabir.academy.data.source.local.entity;
 
 public class ContentEntity {
     private String mContent;

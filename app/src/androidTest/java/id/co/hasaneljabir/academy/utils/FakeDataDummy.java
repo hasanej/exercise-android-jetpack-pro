@@ -2,8 +2,8 @@ package id.co.hasaneljabir.academy.utils;
 
 import java.util.ArrayList;
 
-import id.co.hasaneljabir.academy.data.CourseEntity;
-import id.co.hasaneljabir.academy.data.ModuleEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.CourseEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.ModuleEntity;
 
 public class FakeDataDummy {
     public static ArrayList<CourseEntity> generateDummyCourses() {

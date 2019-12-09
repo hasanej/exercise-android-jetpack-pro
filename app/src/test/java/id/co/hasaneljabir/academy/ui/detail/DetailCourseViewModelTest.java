@@ -9,12 +9,13 @@ import org.junit.Rule;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import id.co.hasaneljabir.academy.data.source.local.entity.CourseEntity;
-import id.co.hasaneljabir.academy.data.source.local.entity.ModuleEntity;
 import id.co.hasaneljabir.academy.data.source.AcademyRepository;
+import id.co.hasaneljabir.academy.data.source.local.entity.CourseEntity;
+import id.co.hasaneljabir.academy.data.source.local.entity.CourseWithModule;
+import id.co.hasaneljabir.academy.data.source.local.entity.ModuleEntity;
 import id.co.hasaneljabir.academy.ui.utils.FakeDataDummy;
+import id.co.hasaneljabir.academy.vo.Resource;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -38,30 +39,16 @@ public class DetailCourseViewModelTest {
     }
 
     @Test
-    public void getCourse() {
-        MutableLiveData<CourseEntity> courseEntities = new MutableLiveData<>();
-        courseEntities.setValue(dummyCourse);
+    public void getCourseWithModule() {
+        Resource<CourseWithModule> resource = Resource.success(FakeDataDummy.generateDummyCourseWithModules(dummyCourse, true));
+        MutableLiveData<Resource<CourseWithModule>> courseEntities = new MutableLiveData<>();
+        courseEntities.setValue(resource);
 
         when(academyRepository.getCourseWithModules(courseId)).thenReturn(courseEntities);
 
-        Observer<CourseEntity> observer = mock(Observer.class);
+        Observer<Resource<CourseWithModule>> observer = mock(Observer.class);
+        viewModel.courseModule.observeForever(observer);
 
-        viewModel.getCourse().observeForever(observer);
-
-        verify(observer).onChanged(dummyCourse);
-    }
-
-    @Test
-    public void getModules() {
-        MutableLiveData<List<ModuleEntity>> moduleEntities = new MutableLiveData<>();
-        moduleEntities.setValue(dummyModules);
-
-        when(academyRepository.getAllModulesByCourse(courseId)).thenReturn(moduleEntities);
-
-        Observer<List<ModuleEntity>> observer = mock(Observer.class);
-
-        viewModel.getModules().observeForever(observer);
-
-        verify(observer).onChanged(dummyModules);
+        verify(observer).onChanged(resource);
     }
 }

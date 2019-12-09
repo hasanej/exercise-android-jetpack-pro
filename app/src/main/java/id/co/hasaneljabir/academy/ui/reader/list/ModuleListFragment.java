@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +25,7 @@ import id.co.hasaneljabir.academy.data.source.local.entity.ModuleEntity;
 import id.co.hasaneljabir.academy.ui.CourseReaderActivity;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderCallback;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderViewModel;
-import id.co.hasaneljabir.academy.viewModel.ViewModelFactory;
+import id.co.hasaneljabir.academy.viewmodel.ViewModelFactory;
 
 
 public class ModuleListFragment extends Fragment implements MyAdapterClickListener {
@@ -66,10 +67,21 @@ public class ModuleListFragment extends Fragment implements MyAdapterClickListen
             progressBar.setVisibility(View.VISIBLE);
             viewModel = obtainViewModel(getActivity());
             adapter = new ModuleListAdapter(this);
-            viewModel.getModules().observe(this, moduleEntities -> {
+            viewModel.modules.observe(this, moduleEntities -> {
                 if (moduleEntities != null) {
-                    progressBar.setVisibility(View.GONE);
-                    populateRecyclerView(moduleEntities);
+                    switch (moduleEntities.status) {
+                        case LOADING:
+                            progressBar.setVisibility(View.VISIBLE);
+                            break;
+                        case SUCCESS:
+                            progressBar.setVisibility(View.GONE);
+                            populateRecyclerView(moduleEntities.data);
+                            break;
+                        case ERROR:
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(getContext(), "Terjadi kesalahan", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
                 }
             });
         }

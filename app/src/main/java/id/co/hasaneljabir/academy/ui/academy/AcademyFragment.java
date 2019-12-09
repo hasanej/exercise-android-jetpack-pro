@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +20,7 @@ import java.util.List;
 
 import id.co.hasaneljabir.academy.R;
 import id.co.hasaneljabir.academy.data.source.local.entity.CourseEntity;
-import id.co.hasaneljabir.academy.viewModel.ViewModelFactory;
+import id.co.hasaneljabir.academy.viewmodel.ViewModelFactory;
 
 
 public class AcademyFragment extends Fragment {
@@ -61,10 +62,25 @@ public class AcademyFragment extends Fragment {
 
             academyAdapter = new AcademyAdapter(getActivity());
 
-            viewModel.getCourses().observe(this, courses -> {
-                progressBar.setVisibility(View.GONE);
-                academyAdapter.setListCourses(courses);
-                academyAdapter.notifyDataSetChanged();
+            viewModel.setUsername("Dicoding");
+            viewModel.courses.observe(this, courses -> {
+                if (courses != null) {
+                    switch (courses.status) {
+                        case LOADING:
+                            progressBar.setVisibility(View.VISIBLE);
+                            break;
+                        case SUCCESS:
+                            progressBar.setVisibility(View.GONE);
+                            academyAdapter.setListCourses(courses.data);
+                            academyAdapter.notifyDataSetChanged();
+                            break;
+                        case ERROR:
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(getContext(), "Terjadi kesalahan", Toast.LENGTH_SHORT).show();
+                            break;
+
+                    }
+                }
             });
 
             rvCourse.setLayoutManager(new LinearLayoutManager(getContext()));

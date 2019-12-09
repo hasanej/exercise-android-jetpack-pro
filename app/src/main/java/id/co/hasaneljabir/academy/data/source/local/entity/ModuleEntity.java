@@ -1,14 +1,44 @@
 package id.co.hasaneljabir.academy.data.source.local.entity;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
+
+@Entity(tableName = "moduleentities",
+        primaryKeys = {"moduleId", "courseId"},
+        foreignKeys = @ForeignKey(entity = CourseEntity.class,
+                parentColumns = "courseId",
+                childColumns = "courseId"),
+        indices = {@Index(value = "moduleId"),
+                @Index(value = "courseId")}
+)
 public class ModuleEntity {
+    @Embedded
     public ContentEntity contentEntity;
+
+    @NonNull
+    @ColumnInfo(name = "moduleId")
     private String mModuleId;
+
+    @NonNull
+    @ColumnInfo(name = "courseId")
     private String mCourseId;
+
+    @NonNull
+    @ColumnInfo(name = "title")
     private String mTitle;
+
+    @NonNull
+    @ColumnInfo(name = "position")
     private Integer mPosition;
+
+    @ColumnInfo(name = "read")
     private boolean mRead = false;
 
-    public ModuleEntity(String moduleId, String courseId, String title, Integer position, Boolean read) {
+    public ModuleEntity(@NonNull String moduleId, @NonNull String courseId, @NonNull String title, @NonNull Integer position, Boolean read) {
         this.mModuleId = moduleId;
         this.mCourseId = courseId;
         this.mTitle = title;
@@ -19,51 +49,43 @@ public class ModuleEntity {
         }
     }
 
-    public ContentEntity getContentEntity() {
-        return contentEntity;
-    }
-
-    public void setContentEntity(ContentEntity contentEntity) {
-        this.contentEntity = contentEntity;
-    }
-
-    public String getmModuleId() {
+    public String getModuleId() {
         return mModuleId;
     }
 
-    public void setmModuleId(String mModuleId) {
-        this.mModuleId = mModuleId;
+    public void setModuleId(String moduleId) {
+        this.mModuleId = moduleId;
     }
 
-    public String getmCourseId() {
+    public String getCourseId() {
         return mCourseId;
     }
 
-    public void setmCourseId(String mCourseId) {
-        this.mCourseId = mCourseId;
+    public void setIdCourse(String courseId) {
+        this.mCourseId = courseId;
     }
 
-    public String getmTitle() {
+    public String getTitle() {
         return mTitle;
     }
 
-    public void setmTitle(String mTitle) {
-        this.mTitle = mTitle;
+    public void setTitle(String title) {
+        this.mTitle = title;
     }
 
-    public Integer getmPosition() {
+    public Integer getPosition() {
         return mPosition;
     }
 
-    public void setmPosition(Integer mPosition) {
-        this.mPosition = mPosition;
+    public void setPosition(Integer position) {
+        this.mPosition = position;
     }
 
-    public boolean ismRead() {
+    public boolean isRead() {
         return mRead;
     }
 
-    public void setmRead(boolean mRead) {
-        this.mRead = mRead;
+    public void setRead(boolean read) {
+        this.mRead = read;
     }
 }

@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,7 +21,7 @@ import java.util.List;
 
 import id.co.hasaneljabir.academy.R;
 import id.co.hasaneljabir.academy.data.source.local.entity.CourseEntity;
-import id.co.hasaneljabir.academy.viewModel.ViewModelFactory;
+import id.co.hasaneljabir.academy.viewmodel.ViewModelFactory;
 
 
 public class BookmarkFragment extends Fragment implements BookmarkFragmentCallback {
@@ -63,9 +64,21 @@ public class BookmarkFragment extends Fragment implements BookmarkFragmentCallba
             adapter = new BookmarkAdapter(getActivity(), this);
 
             viewModel.getBookmarks().observe(this, courses -> {
-                progressBar.setVisibility(View.GONE);
-                adapter.setListCourses(courses);
-                adapter.notifyDataSetChanged();
+                if (courses != null) {
+                    switch (courses.status) {
+                        case LOADING:
+                            progressBar.setVisibility(View.VISIBLE);
+                            break;
+                        case SUCCESS:
+                            progressBar.setVisibility(View.GONE);
+                            adapter.setListCourses(courses.data);
+                            adapter.notifyDataSetChanged();
+                        case ERROR:
+                            progressBar.setVisibility(View.GONE);
+                            Toast.makeText(getContext(), "Terjadi kesalahan", Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
             });
 
             rvBookmark.setLayoutManager(new LinearLayoutManager(getContext()));

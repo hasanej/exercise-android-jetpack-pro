@@ -33,7 +33,7 @@ public class DetailCourseAdapter extends RecyclerView.Adapter<DetailCourseAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ModuleViewHolder viewHolder, int position) {
-        viewHolder.bind(mModules.get(position).getmTitle());
+        viewHolder.bind(mModules.get(position).getTitle());
     }
 
     @Override

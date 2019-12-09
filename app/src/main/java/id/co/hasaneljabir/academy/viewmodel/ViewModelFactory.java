@@ -1,4 +1,4 @@
-package id.co.hasaneljabir.academy.viewModel;
+package id.co.hasaneljabir.academy.viewmodel;
 
 import android.app.Application;
 

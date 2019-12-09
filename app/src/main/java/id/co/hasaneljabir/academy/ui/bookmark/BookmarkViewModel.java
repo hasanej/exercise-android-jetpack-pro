@@ -5,8 +5,9 @@ import androidx.lifecycle.ViewModel;
 
 import java.util.List;
 
-import id.co.hasaneljabir.academy.data.source.local.entity.CourseEntity;
 import id.co.hasaneljabir.academy.data.source.AcademyRepository;
+import id.co.hasaneljabir.academy.data.source.local.entity.CourseEntity;
+import id.co.hasaneljabir.academy.vo.Resource;
 
 public class BookmarkViewModel extends ViewModel {
     private AcademyRepository academyRepository;
@@ -15,7 +16,7 @@ public class BookmarkViewModel extends ViewModel {
         this.academyRepository = mAcademyRepository;
     }
 
-    LiveData<List<CourseEntity>> getBookmarks() {
+    LiveData<Resource<List<CourseEntity>>> getBookmarks() {
         return academyRepository.getBookmarkedCourses();
     }
 }

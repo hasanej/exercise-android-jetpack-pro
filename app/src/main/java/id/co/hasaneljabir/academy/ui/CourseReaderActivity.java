@@ -14,7 +14,7 @@ import id.co.hasaneljabir.academy.ui.reader.CourseReaderCallback;
 import id.co.hasaneljabir.academy.ui.reader.CourseReaderViewModel;
 import id.co.hasaneljabir.academy.ui.reader.content.ModuleContentFragment;
 import id.co.hasaneljabir.academy.ui.reader.list.ModuleListFragment;
-import id.co.hasaneljabir.academy.viewModel.ViewModelFactory;
+import id.co.hasaneljabir.academy.viewmodel.ViewModelFactory;
 
 public class CourseReaderActivity extends AppCompatActivity implements CourseReaderCallback {
 
